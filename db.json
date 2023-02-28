@@ -1,0 +1,136 @@
+{
+  "quadros": [
+    {
+      "id": 1,
+      "titulo": "Kanban Board Example 1"
+    },
+    {
+      "id": 2,
+      "titulo": "Kanban Board Example 2"
+    },
+    {
+      "id": 3,
+      "titulo": "Kanban Board Example 3"
+    },
+    {
+      "id": 4,
+      "titulo": "Kanban Board Example 4"
+    }
+  ],
+  "tarefas": [
+    {
+      "id": 5,
+      "titulo": "Example Task Done",
+      "descricao": "",
+      "listastarefasId": 3
+    },
+    {
+      "id": 6,
+      "titulo": "Example Task Custom List",
+      "descricao": "",
+      "listastarefasId": 4
+    },
+    {
+      "id": 7,
+      "titulo": "Example Task 4",
+      "descricao": "",
+      "listastarefasId": 2
+    },
+    {
+      "id": 8,
+      "titulo": "Example Task 15",
+      "descricao": "",
+      "listastarefasId": 2
+    },
+    {
+      "id": 12,
+      "titulo": "Example Task 1",
+      "descricao": "teste",
+      "listastarefasId": 1
+    },
+    {
+      "id": 13,
+      "titulo": "Example Task 2",
+      "descricao": "teste22",
+      "listastarefasId": 1
+    },
+    {
+      "id": 14,
+      "titulo": "Example Task 3",
+      "descricao": "",
+      "listastarefasId": 1
+    }
+  ],
+  "listastarefas": [
+    {
+      "id": 1,
+      "titulo": "To Do",
+      "quadrosId": 1
+    },
+    {
+      "id": 2,
+      "titulo": "Doing",
+      "quadrosId": 1
+    },
+    {
+      "id": 3,
+      "titulo": "Done",
+      "quadrosId": 1
+    },
+    {
+      "id": 4,
+      "titulo": "Custom List",
+      "quadrosId": 1
+    },
+    {
+      "id": 5,
+      "titulo": "Second Custom List",
+      "quadrosId": 1
+    },
+    {
+      "id": 6,
+      "titulo": "To Do",
+      "quadrosId": 2
+    },
+    {
+      "id": 7,
+      "titulo": "Doing",
+      "quadrosId": 2
+    },
+    {
+      "id": 8,
+      "titulo": "Done",
+      "quadrosId": 2
+    },
+    {
+      "id": 9,
+      "titulo": "To Do",
+      "quadrosId": 3
+    },
+    {
+      "id": 10,
+      "titulo": "Done",
+      "quadrosId": 3
+    },
+    {
+      "id": 11,
+      "titulo": "Doing",
+      "quadrosId": 3
+    },
+    {
+      "id": 12,
+      "titulo": "To Do",
+      "quadrosId": 4
+    },
+    {
+      "id": 13,
+      "titulo": "Doing",
+      "quadrosId": 4
+    },
+    {
+      "id": 14,
+      "titulo": "Done",
+      "quadrosId": 4
+    }
+  ]
+}

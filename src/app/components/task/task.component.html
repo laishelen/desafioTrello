@@ -1,0 +1,44 @@
+<div class="box">
+    <input class="grab" disabled value="{{taskDetail.titulo}}" id="{{taskDetail.id}}" style="width:150px;height:30px;"/>
+    <div class="menu-drop">
+        <button type="button" class="close">
+            <img src="https://cdn-icons-png.flaticon.com/512/3502/3502458.png" width="20" height="20">
+        </button> 
+        <div class="drop-content">
+            <a (click)="showDesc=true" data-toggle="modal" href="#adicionarQuadro{{taskDetail.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Editar</a>    
+            <a (click)="deleteTask()">Deletar</a>      
+        </div>
+    </div>    
+</div>
+
+<div class="modal fade" id="adicionarQuadro{{taskDetail.id}}">
+    <div class="modal-dialog" style="max-width:500px">
+        <div class="modal-content">                                       
+            <div class="modal-body mt-2" style="max-width:350px">                     
+                <h4 class="display-4" style="font-size:13pt">{{taskDetail.titulo}}</h4>                  
+                <h4 class="display-4" style="font-size:13pt">Descrição:</h4>  
+                <textarea type="text" placeholder="Adicione uma descrição mais detalhada..." style="width:465px;" [(ngModel)]="taskDetail.descricao"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                </button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="updateTask()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

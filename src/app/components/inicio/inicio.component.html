@@ -1,0 +1,52 @@
+<app-menu></app-menu>
+<!--<select [ngModel]="selectedBoard" (ngModelChange)="selectBoard($event)" style="width:200px;height:40px;" class="form-select btn-secondary">
+    <option [ngValue]="board" *ngFor="let board of listBoards">{{ board.titulo }}</option>
+</select>-->
+
+<div class="container">
+    <div class="text-left mt-3">               
+        <button type="button" class="btn btn-primary" style="width:180px;height:40px;" data-action="inserir" data-toggle="modal" data-target="#criarQuadro">
+            Novo Quadro             
+        </button>  
+    </div>  
+    <div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
+        <div class="col" *ngFor="let board of listBoards">
+            <div class="card" style="width:220px">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{board.titulo}}</h5>                
+                    <button class="btn btn-info" routerLink="/board/{{board.id}}" style="width:70px;height:40px;">Abrir</button>
+                    <button class="btn btn-danger" (click)="deleteBoard(board.id)" style="width:85px;height:40px;">Deletar</button>
+                </div>
+            </div>
+        </div>
+        <br/>    
+    </div>
+</div>
+
+<div class="modal fade" id="criarQuadro">
+    <div class="modal-dialog" style="max-width:500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="display-4" style="font-size:24pt">Criar quadro</h4>
+                <h4 class="display-4" style="font-size:24pt"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body mt-2" style="max-width:350px">                     
+                <h4 class="display-4" style="font-size:13pt">Título do quadro:</h4>  
+                <input type="text" placeholder="Insira um título para este quadro..." class="form-control" id="titulo" name="titulo" [(ngModel)]="board.titulo"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                </button>
+                <button type="button" class="btn btn-success" (click)="saveBoard()" data-dismiss="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                    </svg>
+                </button>               
+            </div>
+        </div>
+    </div>
+</div>
