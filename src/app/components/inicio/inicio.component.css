@@ -1,0 +1,27 @@
+.btn-primary {
+    margin-top:20px;
+    width:180px;
+    height:40px;
+}
+
+.card {
+    width:250px;
+}
+
+.btn-info {
+    width:85px;
+    height:40px;
+}
+
+.btn-danger {
+    width:105px;
+    height:40px;
+}
+
+.modal-dialog {
+    max-width:500px;
+}
+
+.modal-body {
+    max-width:320px;
+}

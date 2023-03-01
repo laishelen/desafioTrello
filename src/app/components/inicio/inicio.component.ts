@@ -16,6 +16,16 @@ export class InicioComponent {
   selectedBoard:Board = {id: 0, titulo: '--'};
   board:Board = {id: 0, titulo: ''};
 
+
+  valorDoInput:string = '';
+  
+  alertaValor(){
+    alert(this.valorDoInput);
+
+  }
+
+
+
   MensagemErro: MensagemErro={
     ErrorCode:0,
     ErrorMessage:''

@@ -75,12 +75,18 @@ export class BoardComponent {
 
   confirmRemoval() {
     if(this.idListFrom!=0 && this.idListTo==0 && !this.confirmationForRemoval) {
+      
       this.confirmationForRemoval = confirm('Realmente não quer mover as tasks para nenhuma outra lista? Se prosseguir, elas serão removidas.');
+      
       console.log(this.confirmationForRemoval);
     }
     //Se a lista já foi atualizada, permite
     if(this.idListFrom!=0 && this.idListTo!=0) {
-      this.confirmationForRemoval = true;
+      if(this.idListFrom == this.idListTo) {
+        alert('Listas não podem ser iguais');
+      } else {
+        this.confirmationForRemoval = true;
+      }
     }
   }
 
@@ -101,17 +107,19 @@ export class BoardComponent {
         this.boardService.getAllTasks(this.idListFrom)
           .subscribe(data => 
               {
-                //No retorno de todas as tarefas da lista, faço um for para cada tarefa solicitando a alteração dela
+                
+                //Crio um array de tasks com o retorno
                 var movableTasks:Task[] = data;
                 //Salvo a quantidade de tarefas retornadas naquela lista, para futura comparação
                 this.noLista = movableTasks.length;
-
+                
+                //No retorno de todas as tarefas da lista, faço um for para cada tarefa solicitando a alteração dela
                 for(var i =0; i< movableTasks.length; i++) {
                   //Solicitando a alteração task por task
                   this.boardService.moveTask(movableTasks[i].id, this.idListTo)
                     .subscribe(MensagemErro => 
                       {
-                        //Para cada retorno de cada tarefa, eu aumento o contador
+                        //Para cada retorno de cada tarefa movida, eu aumento o contador
                         this.updateCounter++;
 
                         /**
@@ -128,6 +136,7 @@ export class BoardComponent {
                                 //Após deletar a lista, atualizo todas as listas e limpo os campos de seleção
                                 this.getTaskLists();
                                 alert('Lista removida e tarefas movidas com sucesso');
+                                this.updateCounter=0;
                                 this.idListFrom=0;
                                 this.idListTo=0;
                               });

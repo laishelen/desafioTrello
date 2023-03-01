@@ -1,0 +1,53 @@
+.buttonBack {
+    width:120px;
+    height:40px;
+    margin-right:20px;
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.btn-primary {
+    width:210px;
+    height:40px;
+}
+
+.btn-danger {
+    width:210px;
+    height:40px;
+    margin-left:20px;
+}
+
+.title {
+    margin-top:30px;
+    margin-bottom:30px;
+    font-size:16pt;
+}
+
+.card {
+    width:17rem;
+}
+
+.addList {
+    width:230px;
+    height:30px;
+}
+
+.buttonAddTask {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.buttonAdd {
+    margin-left:3px;
+    width:180px;
+    height:40px;
+}
+
+.modal-dialog {
+    max-width:500px
+}
+
+.form-select {
+    width:200px;
+    height:40px;
+}

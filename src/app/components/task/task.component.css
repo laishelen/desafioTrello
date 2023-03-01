@@ -1,5 +1,7 @@
 .grab {
     cursor: -webkit-grab; cursor: grab;
+    width:150px;
+    height:30px;
 }
 
 button[name="drop"]{    
@@ -60,4 +62,25 @@ button[name="drop"]{
     border:none;
     float:right;
     padding: 4px 10px;
+}
+
+.modal-dialog {
+  max-width:500px;
+}
+
+.modal-body {
+  max-width:350px;
+}
+
+.description {
+  margin-top: 20px;
+  font-size:13pt;
+}
+
+.textarea {
+  width:465px;
+}
+
+.title {
+  width:240px;
 }

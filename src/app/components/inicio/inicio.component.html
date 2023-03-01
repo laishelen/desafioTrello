@@ -1,21 +1,32 @@
 <app-menu></app-menu>
-<!--<select [ngModel]="selectedBoard" (ngModelChange)="selectBoard($event)" style="width:200px;height:40px;" class="form-select btn-secondary">
-    <option [ngValue]="board" *ngFor="let board of listBoards">{{ board.titulo }}</option>
-</select>-->
 
-<div class="container">
-    <div class="text-left mt-3">               
-        <button type="button" class="btn btn-primary" style="width:180px;height:40px;" data-action="inserir" data-toggle="modal" data-target="#criarQuadro">
-            Novo Quadro             
-        </button>  
-    </div>  
-    <div class="row row-cols-1 row-cols-md-5 g-4 mt-4 ">
+<div class="container">        
+    <button type="button" class="btn btn-primary" data-action="inserir" data-toggle="modal" data-target="#criarQuadro">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Novo Quadro
+    </button>     
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-4">
         <div class="col" *ngFor="let board of listBoards">
-            <div class="card" style="width:220px">
+            <div class="card">
                 <div class="card-body text-center">
-                    <h5 class="card-title">{{board.titulo}}</h5>                
-                    <button class="btn btn-info" routerLink="/board/{{board.id}}" style="width:70px;height:40px;">Abrir</button>
-                    <button class="btn btn-danger" (click)="deleteBoard(board.id)" style="width:85px;height:40px;">Deletar</button>
+                    <h5 class="card-title" style="font-size:10pt">{{board.titulo}}</h5>                
+                    <button type="button" class="btn btn-info" routerLink="/board/{{board.id}}">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" class="mb-1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+                            <path d="M20 21H3C2.44772 21 2 20.5523 2 20L2 4C2 3.44772 2.44771 3 3 3H7.73381C8.08507 3 8.41058 3.1843 8.5913 3.4855L9.8087 5.5145C9.98942 5.8157 10.3149 6 10.6662 6H20C20.5523 6 21 6.44772 21 7V10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path> <path d="M4.79903 10.7369L2.34449 19.7369C2.17099 20.373 2.64988 21 3.30925 21H19.2362C19.6872 21 20.0823 20.6982 20.201 20.2631L22.6555 11.2631C22.829 10.627 22.3501 10 21.6908 10H5.7638C5.31284 10 4.91769 10.3018 4.79903 10.7369Z" stroke="#ffffff" stroke-width="2"></path> </g>
+                        </svg>
+                        Abrir
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="deleteBoard(board.id)">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" class="mb-1"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                            <path d="M14 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                            <path d="M4 7H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                            <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
+                            <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g>
+                        </svg>
+                        Deletar                        
+                    </button>
                 </div>
             </div>
         </div>
@@ -24,15 +35,14 @@
 </div>
 
 <div class="modal fade" id="criarQuadro">
-    <div class="modal-dialog" style="max-width:500px">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="display-4" style="font-size:24pt">Criar quadro</h4>
-                <h4 class="display-4" style="font-size:24pt"></h4>
+                <h4 style="font-size:20pt">Criar quadro</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body mt-2" style="max-width:350px">                     
-                <h4 class="display-4" style="font-size:13pt">Título do quadro:</h4>  
+            <div class="modal-body">                     
+                <h4 style="font-size:12pt">Título do quadro:</h4>  
                 <input type="text" placeholder="Insira um título para este quadro..." class="form-control" id="titulo" name="titulo" [(ngModel)]="board.titulo"/>
             </div>
             <div class="modal-footer">
@@ -40,11 +50,13 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
                     </svg>
+                    Voltar
                 </button>
                 <button type="button" class="btn btn-success" (click)="saveBoard()" data-dismiss="modal">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                     </svg>
+                    Salvar
                 </button>               
             </div>
         </div>

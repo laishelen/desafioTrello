@@ -23,7 +23,7 @@ export class TaskComponent {
 
   updateTask() {
     this.boardService.updateTask(this.taskDetail)
-      .subscribe(MensagemErro => alert('Descrição atualizada com sucesso.'));
+      .subscribe(MensagemErro => alert('Edição realizada com sucesso.'));
   }
 
   deleteTask() {

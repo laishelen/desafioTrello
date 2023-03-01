@@ -1,5 +1,5 @@
 {
-  "name": "teste-audo",
+  "name": "desafio-trello",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -25,7 +25,6 @@
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
-    "topromise": "^1.0.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },
