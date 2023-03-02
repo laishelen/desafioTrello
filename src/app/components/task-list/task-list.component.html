@@ -3,25 +3,27 @@
         <div class="card-body" dropzone="move" (dragover)="allowDrop($event)" (drop)="drop($event)">            
             <h5 class="card-title">{{listDetails.titulo}}</h5>             
 
-            <app-task draggable="true" (dragstart)="drag($event)" (updateParent)="getTasks($event)" *ngFor="let task of taskList" [taskDetail]="task" id="{{task.id}}"></app-task>
+            <app-task draggable="true" (dragstart)="drag($event)" (updateParent)="getTasks()" 
+            *ngFor="let task of taskList" [taskDetail]="task" id="{{task.id}}"></app-task>
 
-            <input *ngIf="showAddTask" [(ngModel)]="newTask.titulo"
-                    class="list-card-composer-textarea js-card-title mt-3"
+            <input  class="list-card-composer-textarea js-card-title mt-3"
+                    *ngIf="showAddTask" [(ngModel)]="newTask.titulo"                    
                     dir="auto" placeholder="Insira um título para este cartão..."
                     data-autosize="true"/> 
 
-            <button *ngIf="showAddTask" type="button" class="btn btn-dark" (click)="cancelTask()">
+            <button type="button" class="btn btn-dark" *ngIf="showAddTask" (click)="cancelTask()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
                 </svg>
             </button>  
-            <button class="btn btn-outline-secondary" *ngIf="showAddTask" (click)="saveTask()" type="button">
+            <button type="button" class="btn btn-outline-secondary" *ngIf="showAddTask" (click)="saveTask()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg>
                 Adicionar Tarefa    
             </button>
-            <button *ngIf="!showAddTask" class="btn btn-info" (click)="showAddTask=true">
+            
+            <button class="btn btn-info" *ngIf="!showAddTask" (click)="showAddTask =!showAddTask">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg>

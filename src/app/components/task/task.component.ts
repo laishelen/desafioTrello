@@ -13,22 +13,33 @@ export class TaskComponent {
   @Input() taskDetail:Task = {id: 0, titulo: '', descricao:'', listastarefasId: 0};
   @Output() updateParent = new EventEmitter<string>();
   showDesc:boolean = false;
-  
+
+  constructor(private boardService: BoardService) {}
+
   MensagemErro: MensagemErro={
     ErrorCode:0,
     ErrorMessage:''
   }  
 
-  constructor(private boardService: BoardService) {}
-
   updateTask() {
     this.boardService.updateTask(this.taskDetail)
-      .subscribe(MensagemErro => alert('Edição realizada com sucesso.'));
-  }
+    .subscribe(MensagemErro => {
+      this.MensagemErro = MensagemErro;
+      this.updateParent.emit('updateTask')
+        alert('Tarefa editada com sucesso.');   
+    })
+  }     
 
   deleteTask() {
-    this.boardService.deleteTask(this.taskDetail.id)
-    .subscribe(MensagemErro => this.updateParent.emit('deleteTask'));
-  }
+    let confirmation = confirm('Tem certeza que deseja deletar essa tarefa?');
+    if(confirmation) {
+      this.boardService.deleteTask(this.taskDetail.id)
+      .subscribe(MensagemErro => {
+        this.MensagemErro = MensagemErro;
+        this.updateParent.emit('deleteTask');
+          alert('Tarefa removida com sucesso.');
+      });
+    }  
+  }    
 }
 

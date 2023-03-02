@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Board } from '../models/board';
-import { catchError } from 'rxjs/operators';
 import { MensagemErro } from '../models/mensagemerro';
 import { TaskList } from '../models/taskList';
 import { Task } from '../models/task';
@@ -20,95 +19,59 @@ export class BoardService {
   constructor(private http:HttpClient) { }
 
   saveBoard(newBoard:Board):Observable<MensagemErro>{
-    return this.http.post<MensagemErro>(this.urlBoards+'quadros', newBoard, this.httpOptions).pipe(
-      catchError(this.handleError<MensagemErro>('saveBoard'))
-    );
+    return this.http.post<MensagemErro>(this.urlBoards+'quadros', newBoard, this.httpOptions);
   }
 
   deleteBoard(id:number):Observable<MensagemErro>{
-    return this.http.delete<MensagemErro>(this.urlBoards+'quadros/'+id).pipe(
-      catchError(this.handleError<MensagemErro>('deleteBoard'))
-    );
+    return this.http.delete<MensagemErro>(this.urlBoards+'quadros/'+id);
   }  
 
   getBoards():Observable<Board[]>{
-    return this.http.get<Board[]>(this.urlBoards+'quadros')
-    .pipe(
-        catchError(this.handleError<Board[]>('getBoards'))
-    );
+    return this.http.get<Board[]>(this.urlBoards+'quadros');
   }
 
   getBoard(board_id:number):Observable<Board[]>{
-    return this.http.get<Board[]>(this.urlBoards+'quadros?id='+board_id)
-    .pipe(
-        catchError(this.handleError<Board[]>('getBoard'))
-    );
+    return this.http.get<Board[]>(this.urlBoards+'quadros?id='+board_id);
   }
 
   //TASK LIST
 
   saveTaskList(newTaskList:TaskList):Observable<MensagemErro>{
-    return this.http.post<MensagemErro>(this.urlBoards+'listastarefas', newTaskList, this.httpOptions).pipe(
-      catchError(this.handleError<MensagemErro>('saveTaskList'))
-    );
+    return this.http.post<MensagemErro>(this.urlBoards+'listastarefas', newTaskList, this.httpOptions);
   }
 
   getTaskLists(board_id:number):Observable<TaskList[]>{
-    return this.http.get<TaskList[]>(this.urlBoards+'listastarefas?quadrosId='+board_id)
-    .pipe(
-        catchError(this.handleError<TaskList[]>('getTaskLists'))
-    );
+    return this.http.get<TaskList[]>(this.urlBoards+'listastarefas?quadrosId='+board_id);
+
   }
 
   deleteTaskList(taskList_id:number):Observable<MensagemErro>{
-    return this.http.delete<MensagemErro>(this.urlBoards+'listastarefas/'+taskList_id).pipe(
-      catchError(this.handleError<MensagemErro>('deleteTaskList'))
-    );
+    return this.http.delete<MensagemErro>(this.urlBoards+'listastarefas/'+taskList_id);
   }
 
   //TASKS
 
   getAllTasks(current_list:number):Observable<Task[]>{
-    return this.http.get<Task[]>(this.urlBoards+'tarefas?listastarefasId='+current_list).pipe(
-      catchError(this.handleError<Task[]>('getAllTasks'))
-    );
+    return this.http.get<Task[]>(this.urlBoards+'tarefas?listastarefasId='+current_list);
   }
   saveTask(newTask:Task):Observable<MensagemErro>{
-    return this.http.post<MensagemErro>(this.urlBoards+'tarefas', newTask, this.httpOptions).pipe(
-      catchError(this.handleError<MensagemErro>('saveTask'))
-    );
+    return this.http.post<MensagemErro>(this.urlBoards+'tarefas', newTask, this.httpOptions);
   }
 
   updateTask(task:Task):Observable<MensagemErro>{
-    return this.http.patch<MensagemErro>(this.urlBoards+'tarefas/'+task.id, task, this.httpOptions).pipe(
-      catchError(this.handleError<MensagemErro>('updateTask'))
-    );
+    return this.http.patch<MensagemErro>(this.urlBoards+'tarefas/'+task.id, task, this.httpOptions);
   }
 
   moveTask(task_id:number, new_list:number):Observable<MensagemErro>{
     var string_json = '{ "listastarefasId": "'+new_list+'"}';
-    return this.http.patch<MensagemErro>(this.urlBoards+'tarefas/'+task_id, string_json, this.httpOptions).pipe(
-      catchError(this.handleError<MensagemErro>('moveTask'))
-    );
+    return this.http.patch<MensagemErro>(this.urlBoards+'tarefas/'+task_id, string_json, this.httpOptions);
   }
   
   getTasks(taskListId:number):Observable<Task[]>{
-    return this.http.get<Task[]>(this.urlBoards+'tarefas?listastarefasId='+taskListId)
-    .pipe(
-      catchError(this.handleError<Task[]>('getTasks'))
-    );
+    return this.http.get<Task[]>(this.urlBoards+'tarefas?listastarefasId='+taskListId);
   }
 
   deleteTask(task_id:number):Observable<MensagemErro>{
-    return this.http.delete<MensagemErro>(this.urlBoards+'tarefas/'+task_id).pipe(
-      catchError(this.handleError<MensagemErro>('deleteTask'))
-    );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-        console.error(error);
-        return of(result as T);
-    };
+    return this.http.delete<MensagemErro>(this.urlBoards+'tarefas/'+task_id);
   }
 }

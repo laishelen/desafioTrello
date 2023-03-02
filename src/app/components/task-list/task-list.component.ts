@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MensagemErro } from 'src/app/models/mensagemerro';
 import { Task } from 'src/app/models/task';
 import { TaskList } from 'src/app/models/taskList';
@@ -29,14 +29,13 @@ export class TaskListComponent {
     this.getTasks();
   }
 
-  getTasks(texto:string='') {
+  getTasks() {
     this.boardService.getTasks(this.listDetails.id)
-      .subscribe(data => this.taskList = data);
+    .subscribe(data => this.taskList = data);
   }
 
   cancelTask() {
     this.showAddTask = false;
-    this.newTask.titulo = '';
   }
 
   saveTask() {
@@ -45,19 +44,20 @@ export class TaskListComponent {
     } else {
       this.newTask.listastarefasId = this.listDetails.id;
       this.boardService.saveTask(this.newTask)
-        .subscribe(MensagemErro => {
-            this.MensagemErro = MensagemErro;
-            this.boardService.getTasks(this.listDetails.id)
-                .subscribe(data => this.taskList = data);
-          });
+      .subscribe(MensagemErro => {
+        this.MensagemErro = MensagemErro;
+        this.boardService.getTasks(this.listDetails.id)
+            .subscribe(data => this.taskList = data);
+      });
       this.newTask.titulo = '';
       this.showAddTask = false;
+        alert('Tarefa criada com sucesso.');
     }
   }
 
   drag(ev:any) {
-    ev.dataTransfer.setData("text", ev.target.id+'/'+this.listDetails.id);
-    addEventListener('successfulDrop',(event => {this.getTasks(); }));
+    ev.dataTransfer.setData("text", ev.target.id);
+    addEventListener('successfulDrop',(ev => {this.getTasks(); }));
   }
 
   allowDrop(ev:any) {
@@ -69,20 +69,16 @@ export class TaskListComponent {
 
     var data = ev.dataTransfer.getData("text");
     
-    //0 -> old_list; 1->task
-    var ids = data.split("/");
-    this.boardService.moveTask(ids[0],this.listDetails.id)
-      .subscribe(MensagemErro => {
-        this.MensagemErro = MensagemErro;
-        this.boardService.getTasks(this.listDetails.id)
-          .subscribe(data => {
-                                this.taskList = data;
-                                dispatchEvent(this.successfulDrop);
-                              }
-                    );
+    this.boardService.moveTask(data,this.listDetails.id)
+    .subscribe(MensagemErro => {
+      this.MensagemErro = MensagemErro;
+      this.boardService.getTasks(this.listDetails.id)
+      .subscribe(data => {
+        this.taskList = data;
+        dispatchEvent(this.successfulDrop);
+        }
+      );
     });
-    console.log('task: '+ids[0]+' lista antiga: '+ids[1]+ ' para lista: '+this.listDetails.id);
   }
-
 }
 

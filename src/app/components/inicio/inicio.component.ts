@@ -10,21 +10,18 @@ import { TaskList } from 'src/app/models/taskList';
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
+
 export class InicioComponent {
   listBoards:Board[] | undefined;
   displayBoard = false;
   selectedBoard:Board = {id: 0, titulo: '--'};
   board:Board = {id: 0, titulo: ''};
 
-
   valorDoInput:string = '';
   
   alertaValor(){
     alert(this.valorDoInput);
-
   }
-
-
 
   MensagemErro: MensagemErro={
     ErrorCode:0,
@@ -41,11 +38,8 @@ export class InicioComponent {
     this.boardService.saveBoard(this.board)
     .subscribe(MensagemErro => {
 
-        this.MensagemErro = MensagemErro;
-
         var board:Board = Object.assign(MensagemErro);
         var todo:TaskList = {id:0, titulo: "To Do", quadrosId: board.id};
-
         this.boardService.saveTaskList(todo).subscribe(MensagemErro => {
           this.MensagemErro = MensagemErro;
         });
@@ -61,6 +55,7 @@ export class InicioComponent {
         });
 
         this.getBoards();
+        alert('Quadro criado com sucesso.');
     });
   }
 
@@ -78,8 +73,6 @@ export class InicioComponent {
 
   selectBoard(selectedBoard:Board) {
     if(selectedBoard.id>0) {
-      /*this.boardService.getTaskLists(selectedBoard.id)
-      .subscribe(data => boar.listAllTaskList = data);*/
       this.selectedBoard = selectedBoard;
       this.router.navigate(['/board', selectedBoard.id ]);
     }
@@ -88,8 +81,7 @@ export class InicioComponent {
   getBoards() {
     this.boardService.getBoards()
     .subscribe(data => {
-                          this.listBoards = data;
-                          //this.listBoards.unshift(this.selectedBoard)
-                        });
+      this.listBoards = data;
+    });
   }
 }
