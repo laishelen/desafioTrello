@@ -29,8 +29,12 @@
       "titulo": "Quadro 7"
     },
     {
-      "id": 8,
-      "titulo": "Quadro 8"
+      "board": {
+        "id": 0,
+        "titulo": ""
+      },
+      "titulo": "Quadro 8",
+      "id": 8
     }
   ],
   "tarefas": [
@@ -43,50 +47,50 @@
     {
       "id": 15,
       "titulo": "Example Task 1",
-      "descricao": "",
+      "descricao": "teste123",
       "listastarefasId": "1"
     },
     {
       "id": 16,
       "titulo": "Example Task 2",
-      "descricao": "",
-      "listastarefasId": 1
+      "descricao": "1234",
+      "listastarefasId": "1"
     },
     {
       "id": 17,
       "titulo": "Example Task 3",
-      "descricao": "",
-      "listastarefasId": 1
+      "descricao": "456",
+      "listastarefasId": "1"
     },
     {
       "id": 18,
       "titulo": "Example Task 4",
       "descricao": "",
-      "listastarefasId": "1"
+      "listastarefasId": "2"
     },
     {
       "id": 19,
       "titulo": "Example Task 6",
       "descricao": "",
-      "listastarefasId": "3"
+      "listastarefasId": "2"
     },
     {
       "id": 20,
       "titulo": "Example Task 7",
       "descricao": "",
-      "listastarefasId": 2
+      "listastarefasId": "3"
     },
     {
       "id": 21,
       "titulo": "Example Task 8",
       "descricao": "",
-      "listastarefasId": "2"
+      "listastarefasId": "3"
     },
     {
       "id": 22,
       "titulo": "Example Task 9",
       "descricao": "",
-      "listastarefasId": "5"
+      "listastarefasId": "3"
     },
     {
       "id": 23,
@@ -209,17 +213,20 @@
     {
       "id": 24,
       "titulo": "To Do",
-      "quadrosId": 8
+      "quadrosId": 8,
+      "tasks": []
     },
     {
       "id": 25,
       "titulo": "Doing",
-      "quadrosId": 8
+      "quadrosId": 8,
+      "tasks": []
     },
     {
       "id": 26,
       "titulo": "Done",
-      "quadrosId": 8
+      "quadrosId": 8,
+      "tasks": []
     }
   ]
 }

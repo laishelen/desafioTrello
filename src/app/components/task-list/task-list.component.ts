@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 import { MensagemErro } from 'src/app/models/mensagemerro';
 import { Task } from 'src/app/models/task';
 import { TaskList } from 'src/app/models/taskList';
-import { BoardService } from 'src/app/services/board.service';
+import { TaskService } from 'src/app/services/task.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-task-list',
@@ -10,27 +11,31 @@ import { BoardService } from 'src/app/services/board.service';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent {
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
   
   successfulDrop = new Event('successfulDrop');
 
   showAddTask:boolean = false;
   taskList:Task[] =[];
   newTask:Task = {id: 0, titulo: '', descricao:'', listastarefasId: 0};
-  @Input() listDetails:TaskList = {id: 0, titulo: '', quadrosId: 0};
+  list:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
+  @Input() listDetails:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
  
   MensagemErro: MensagemErro={
     ErrorCode:0,
     ErrorMessage:''
   }  
 
-  constructor(private boardService: BoardService) { }
+  constructor(private taskService: TaskService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void { 
     this.getTasks();
-  }
+  }   
 
   getTasks() {
-    this.boardService.getTasks(this.listDetails.id)
+    this.taskService.getTasks(this.listDetails.id)
     .subscribe(data => this.taskList = data);
   }
 
@@ -43,42 +48,21 @@ export class TaskListComponent {
       this.showAddTask = false;
     } else {
       this.newTask.listastarefasId = this.listDetails.id;
-      this.boardService.saveTask(this.newTask)
+      this.taskService.saveTask(this.newTask)
       .subscribe(MensagemErro => {
         this.MensagemErro = MensagemErro;
-        this.boardService.getTasks(this.listDetails.id)
+        this.taskService.getTasks(this.listDetails.id)
             .subscribe(data => this.taskList = data);
       });
       this.newTask.titulo = '';
       this.showAddTask = false;
-        alert('Tarefa criada com sucesso.');
+      
+        this._snackBar.open('Tarefa criada com sucesso.', 'OK', {
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 2500,    
+          panelClass: ['custom-style']})
     }
-  }
-
-  drag(ev:any) {
-    ev.dataTransfer.setData("text", ev.target.id);
-    addEventListener('successfulDrop',(ev => {this.getTasks(); }));
-  }
-
-  allowDrop(ev:any) {
-    ev.preventDefault();
-  }
-
-  drop(ev:any) {
-    ev.preventDefault();
-
-    var data = ev.dataTransfer.getData("text");
-    
-    this.boardService.moveTask(data,this.listDetails.id)
-    .subscribe(MensagemErro => {
-      this.MensagemErro = MensagemErro;
-      this.boardService.getTasks(this.listDetails.id)
-      .subscribe(data => {
-        this.taskList = data;
-        dispatchEvent(this.successfulDrop);
-        }
-      );
-    });
   }
 }
 

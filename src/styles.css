@@ -2,3 +2,24 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  --primary-color: #153d77;
+  --secondary-color: #6c757d;
+  --white-color: #fff;
+  --success-color: #198754;
+  --delete-color: #dc3545;
+  --dark-color: #000000;
+  --background-color: #f2f2f2;
+}
+
+.custom-style button:hover {
+    background-color: rgb(62, 56, 56);
+    color: rgb(0, 0, 0);
+    border: none;
+}
+
+.custom-style {
+  --mdc-snackbar-container-color: var(--dark-color);
+  --mat-mdc-snack-bar-button-color: var(--white-color);
+}

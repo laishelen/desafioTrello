@@ -1,0 +1,23 @@
+<div class="card">
+    <div mat-dialog-title>
+        <h4 class="dialog-title">Criar quadro</h4>
+        <button type="button" class="close" (click)="close()">&times;</button>
+    </div>    
+    <div mat-dialog-content>     
+        <mat-form-field class="example-full-width">
+            <mat-label>Título do quadro</mat-label>
+            <input  matInput type="text" [(ngModel)]="board.titulo" dir="auto"
+            placeholder="Insira um título para este quadro..." data-autosize="true"> 
+        </mat-form-field> 
+    </div>
+    <div mat-dialog-actions class="buttons">
+        <button mat-raised-button class="btn btn-dark" (click)="close()" color="basic">
+            <mat-icon>keyboard_return</mat-icon>
+            Voltar
+        </button>  
+        <button mat-raised-button class="btn btn-success" (click)="saveBoard()" color="primary">
+            <mat-icon>check</mat-icon>
+            Salvar
+        </button>     
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="card">
+    <div mat-dialog-title>
+        <h4 class="deleteText">Remover:</h4>
+        <p class="selectedBoard">{{board.titulo}}</p>
+        <button type="button" class="close" (click)="close()">&times;</button>
+    </div>    
+    <div mat-dialog-content>
+        <h4 class="removalList">Lista para remoção:</h4>
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Escolha uma opção</mat-label>
+            <mat-select [(ngModel)]="idListFrom">
+                <mat-option *ngFor="let taskList of listAllTaskList" [value]="taskList.id">{{taskList.titulo}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <h4 class="moveTask">Mover as tarefas para:</h4>  
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Escolha uma opção</mat-label>
+            <mat-select [(ngModel)]="idListTo">
+                <mat-option *ngFor="let taskList of listAllTaskList" [value]="taskList.id">{{ taskList.titulo }}</mat-option>
+            </mat-select>
+        </mat-form-field>     
+    </div>
+    <div mat-dialog-actions class="buttons">
+        <button mat-raised-button (click)="close()" color="basic">
+            <mat-icon>keyboard_return</mat-icon>
+            Voltar
+        </button>  
+        <button mat-raised-button (mouseover)="confirmRemoval()" (click)="removeTask()" color="warn">
+            <mat-icon>delete_forever</mat-icon>
+            Remover
+        </button>   
+    </div>
+</div>

@@ -1,0 +1,40 @@
+.card {
+    width: 400px;
+}
+
+.deleteText {
+    position: absolute;
+    margin-bottom:25px;
+    font-size: 20pt;
+}
+
+.selectedBoard {
+    position: absolute;
+    margin-top:11px;
+    margin-bottom:25px;
+    right:55px;
+    font-size:10pt;
+}
+
+.close {
+    margin-top: 10px;
+}
+
+.removalList {
+    margin-top: 45px;
+    font-size:12pt;
+}
+
+.moveTask {
+    font-size:12pt;
+}
+
+.buttons {
+    margin-bottom: 3px;
+    justify-content: end;
+}
+
+.example-full-width {
+    width: 100%;
+}
+

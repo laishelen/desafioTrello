@@ -1,53 +1,51 @@
 .buttonBack {
-    width:120px;
+    width:100px;
     height:40px;
     margin-right:20px;
     margin-top:30px;
     margin-bottom:30px;
+    margin-left:-15px;
 }
 
-.btn-primary {
-    width:210px;
+.addAnotherList {
+    width:200px;
     height:40px;
 }
 
-.btn-danger {
-    width:210px;
+.removeList {
+    width:155px;
     height:40px;
     margin-left:20px;
 }
 
 .title {
-    margin-top:30px;
+    margin-left:-15px;
+    margin-top:10px;
     margin-bottom:30px;
     font-size:16pt;
+    font-weight: bold;
 }
 
 .card {
     width:17rem;
+    margin-left:-15px;
 }
 
-.addList {
-    width:230px;
-    height:30px;
-}
-
-.addTaskButton {
-    margin-top:10px;
+.backButton {
     margin-bottom:10px;
-}
-
-.addButton {
-    margin-left:3px;
-    width:180px;
     height:40px;
 }
 
-.modal-dialog {
-    max-width:500px
-}
-
-.form-select {
-    width:200px;
+.addButton {    
+    margin-bottom:10px;
+    margin-left:5px;
+    width:130px;
     height:40px;
 }
+
+.example-full-width {
+    width: 100%;
+}
+
+
+

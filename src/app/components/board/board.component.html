@@ -1,85 +1,46 @@
 <app-menu></app-menu>
 
-<div class="container"> 
-    <button class="btn btn-dark buttonBack" routerLink="/inicio">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-        </svg>
+<div class="container">     
+    <button mat-raised-button class="buttonBack" color="basic" routerLink="/inicio">
+        <mat-icon>keyboard_return</mat-icon>
         Voltar
-    </button>
-    <button class="btn btn-primary" (click)="showAddTaskList =!showAddTaskList">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
+    </button>     
+    <button mat-raised-button class="addAnotherList" color="primary" (click)="showAddTaskList =!showAddTaskList">
+        <mat-icon>add</mat-icon>
         Adicionar outra lista
-    </button>
-    <a class="btn btn-danger" data-toggle="modal" href="#removeList{{selectedBoard.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
-            <path d="M14 11V17" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
-            <path d="M4 7H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
-            <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> 
-            <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g>
-        </svg>
-        Remover Lista
-    </a>
-
-    <div class="title">{{selectedBoard.titulo}}</div>    
+    </button>  
+    <button mat-raised-button class="removeList" (click)="openDialog()" role="button" aria-expanded="false" aria-controls="collapseExample" color="warn">
+        <mat-icon>delete</mat-icon>
+        Remover lista
+    </button>    
+    
+    <div class="title">{{selectedBoard.titulo}}</div>
     <div *ngIf="showAddTaskList" class="card">
-        <div class="card-body">
-            <input class="addList" [(ngModel)]="newList.titulo" placeholder="Insira o título da lista..."> 
-            <button type="button" class="btn btn-dark addTaskButton" (click)="showAddTaskList =!showAddTaskList">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-                </svg>
+        <div class="card-body">            
+            <mat-form-field class="example-full-width">
+                <mat-label>Título</mat-label>
+                <input matInput [(ngModel)]="newList.titulo" placeholder="Insira o título da lista..."> 
+            </mat-form-field>            
+   
+            <button mat-raised-button class="backButton" color="basic" (click)="showAddTaskList =!showAddTaskList">
+                <mat-icon>keyboard_return</mat-icon>
+                Voltar                
             </button>              
-            <button type="button" class="btn btn-outline-secondary addButton" *ngIf="showAddTaskList" (click)="addList()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-                Adicionar Lista  
-            </button>     
+            <button mat-raised-button class="addButton" color="primary" *ngIf="showAddTaskList" (click)="addList()">
+                <mat-icon>add</mat-icon>
+                Lista
+            </button>   
         </div>
     </div>   
     <div class="row row-cols-1 row-cols-md-4 g-4 mt-4" *ngIf="displayBoard">
-        <app-task-list *ngFor="let taskList of listAllTaskList" [listDetails]="taskList"></app-task-list>
+        <app-task-list  
+            cdkDropList
+            [cdkDropListConnectedTo]="arrayTaskListId"
+            class="example-list"   
+            *ngFor="let taskList of listAllTaskList" 
+            (cdkDropListDropped)="drop($event)"            
+            [listDetails]="taskList" 
+            id="{{taskList.id}}">
+        </app-task-list>
     </div>
 </div>
-
-<div class="modal fade" id="removeList{{selectedBoard.id}}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="modal-header">
-                    <h4 style="font-size:20pt">Remover lista de:</h4>
-                    <h4 style="font-size:12pt">{{selectedBoard.titulo}}</h4>
-                </div>                    
-                <div class="modal-body">                     
-                    <h4 style="font-size:12pt">Lista para remoção:</h4>  
-                    <select [(ngModel)]="idListFrom" class="form-select btn-secondary">
-                            <option [ngValue]="taskList.id" *ngFor="let taskList of listAllTaskList">{{ taskList.titulo }}</option>
-                    </select>            
-                                
-                    <h4 style="font-size:12pt">Mover as tarefas para:</h4>  
-                    <select [(ngModel)]="idListTo" class="form-select btn-secondary">
-                            <option [ngValue]="taskList.id" *ngFor="let taskList of listAllTaskList">{{ taskList.titulo }}</option>
-                    </select>  
-                </div>                     
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                    Voltar
-                </button>
-                <button type="button" (mouseover)="confirmRemoval()" (click)="removeTask()" class="btn btn-success" data-dismiss="modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                    </svg>
-                    Salvar
-                </button>               
-            </div>
-        </div>
-    </div>
-</div>
-

@@ -1,0 +1,30 @@
+<div class="card">
+    <div mat-dialog-title>
+        <h4 class="dialog-title">Editar tarefa:</h4>
+        <button type="button" class="close" (click)="close()">&times;</button>
+    </div>    
+    <div mat-dialog-content>
+        
+        <mat-form-field class="example-full-width">
+            <mat-label>Título</mat-label>
+            <input  matInput type="text"
+                    [(ngModel)]="task.titulo" dir="auto" data-autosize="true"> 
+        </mat-form-field> 
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Descrição</mat-label>    
+            <textarea   matInput type="text" placeholder="Adicione uma descrição mais detalhada..." 
+                        [(ngModel)]="task.descricao"></textarea>
+        </mat-form-field> 
+    </div>
+    <div mat-dialog-actions class="buttons">
+        <button mat-raised-button class="btn btn-dark" (click)="close()" color="basic">
+            <mat-icon>keyboard_return</mat-icon>
+            Voltar
+        </button>  
+        <button mat-raised-button class="btn btn-success" color="primary" (click)="updateTask()">
+            <mat-icon>check</mat-icon>
+            Salvar
+        </button>        
+    </div>
+</div>

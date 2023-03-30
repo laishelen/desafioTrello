@@ -1,0 +1,22 @@
+.card {
+    width:430px;
+}
+
+.dialog-title {
+    margin-top: -10px;
+    font-size:20pt;
+}
+
+.close {
+    margin-top: -62px;
+}
+
+.buttons {
+    margin-bottom: 3px;
+    justify-content: end;
+}
+
+.example-full-width {
+    width: 100%;
+}
+

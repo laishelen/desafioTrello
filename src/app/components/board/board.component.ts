@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
 import { Board } from 'src/app/models/board';
 import { BoardService } from 'src/app/services/board.service';
+import { TaskListService } from 'src/app/services/task-list.service';
+import { TaskService } from 'src/app/services/task.service';
 import { MensagemErro } from 'src/app/models/mensagemerro';
 import { TaskList } from 'src/app/models/taskList';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Task } from 'src/app/models/task';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { RemoveListDialogComponent } from './remove-list.dialog/remove-list.dialog.component';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-board',
@@ -14,11 +20,16 @@ import { Task } from 'src/app/models/task';
 
 export class BoardComponent {
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   showAddTaskList = false;
   displayBoard:boolean = false;
   selectedBoard:Board = {id: 0, titulo: '--'};
-  newList:TaskList = {id: 0, titulo: '', quadrosId:0};
+  newList:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
+  taskList:Task[] =[];
   listAllTaskList:TaskList[] | undefined;
+  arrayTaskListId:string[] = [];
 
   noList:number = 0;
   updateCounter:number = 0;
@@ -31,20 +42,51 @@ export class BoardComponent {
     ErrorMessage:''
   }  
 
-  constructor(private route:ActivatedRoute, private boardService: BoardService) { }
+  constructor(
+    private route:ActivatedRoute,
+    private boardService: BoardService, 
+    private taskListService: TaskListService, 
+    private taskService: TaskService,
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => this.selectedBoard.id = params['id']);
     this.getBoard(this.selectedBoard.id);
-  }  
+  }
 
   getTaskLists() {
-    this.boardService.getTaskLists(this.selectedBoard.id) 
+    this.taskListService.getTaskLists(this.selectedBoard.id) 
     .subscribe(data => {
       this.displayBoard = true;
       this.listAllTaskList = data;
+      this.arrayTaskListId = this.listAllTaskList.map(obj => obj.id.toString());
     });
   }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    var taskId = event.item.element.nativeElement.id;
+    var newColumnId = event.container.id;
+    var oldColumnId = event.previousContainer.id;
+    
+    console.log('tarefa: '+taskId+' da lista: ' + oldColumnId + ' pra lista: ' + newColumnId);
+
+    this.taskService.moveTask(taskId,newColumnId)
+    .subscribe(MensagemErro => {
+      this.MensagemErro = MensagemErro;
+      this.getTaskLists();
+    });
+    // if (event.previousContainer === event.container) {
+    //   moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    // } else {
+    //   transferArrayItem(
+    //     event.previousContainer.data,
+    //     event.container.data,
+    //     event.previousIndex,
+    //     event.currentIndex,
+    //   );
+    // }
+  }  
 
   getBoard(id:number) {
     this.boardService.getBoard(id)
@@ -57,86 +99,43 @@ export class BoardComponent {
   addList() {
     this.displayBoard = true;
     if(this.newList.titulo === '') {
-      alert('Preencha o título');
+
+      this._snackBar.open('Preencha o título.', 'OK', {
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition, 
+        duration: 2500,    
+        panelClass: ['custom-style']})
+
     } else {
       this.newList.quadrosId = this.selectedBoard.id;
-      this.boardService.saveTaskList(this.newList)
+      this.taskListService.saveTaskList(this.newList)
       .subscribe(MensagemErro => {
         this.MensagemErro = MensagemErro;
-        this.boardService.getTaskLists(this.selectedBoard.id)
+        this.taskListService.getTaskLists(this.selectedBoard.id)
         .subscribe(data => {
           this.listAllTaskList = data;
+          this.arrayTaskListId = this.listAllTaskList.map(obj => obj.id.toString());
           this.newList.titulo = '';
           this.showAddTaskList = false;
-            alert('Lista criada com sucesso.');
+
+          this._snackBar.open('Lista criada com sucesso.', 'OK', {
+            horizontalPosition: this.horizontalPosition,
+            verticalPosition: this.verticalPosition, 
+            duration: 2500,    
+            panelClass: ['custom-style']
+            
+          });
         });
       });
     }
-  }
+  }  
 
-  confirmRemoval() {
-    if(this.idListFrom!=0 && this.idListTo==0 && !this.confirmationForRemoval) {
-      this.confirmationForRemoval = confirm('Realmente não quer mover as tasks para nenhuma outra lista? Se prosseguir, elas serão removidas.')
-      console.log(this.confirmationForRemoval);
-    } else {
-      //Se a lista já foi atualizada, permite
-      if(this.idListFrom!=0 && this.idListTo!=0) {
-        if(this.idListFrom == this.idListTo) {
-          alert('Listas não podem ser iguais');
-        } else {
-          this.confirmationForRemoval = true;
-        }
-      }
-    }
-  }
-
-  removeTask() {
-    if(this.idListFrom!=0 && this.confirmationForRemoval) {
-      if(this.idListTo != 0) {
-        //Caso tenhamos que mover, busco todas as atividades da lista em questão
-        this.boardService.getAllTasks(this.idListFrom)
-        .subscribe(data => 
-            {                     
-              var movableTasks:Task[] = data;
-              this.noList = movableTasks.length;
-              for(var i =0; i< movableTasks.length; i++) {
-                //Solicitando a alteração task por task
-                this.boardService.moveTask(movableTasks[i].id, this.idListTo)
-                .subscribe(MensagemErro => 
-                  {
-                    this.updateCounter++;
-                    if(this.updateCounter == this.noList) {
-                      //Caso todos os elementos tenham sido alterados, deleto a lista
-                      this.boardService.deleteTaskList(this.idListFrom)
-                        .subscribe(MensagemErro =>
-                          {
-                            this.MensagemErro = MensagemErro;
-                            //Após deletar a lista, atualizo todas as listas e limpo os campos de seleção
-                            this.getTaskLists();
-                            alert('Lista removida e tarefas movidas com sucesso');
-                            this.updateCounter=0;
-                            this.idListFrom=0;
-                            this.idListTo=0;
-                          });
-                    }
-                    this.MensagemErro = MensagemErro;
-                  });
-                }
-              });
-      } else {
-        //Caso só seja preciso deletar, sem mover
-        this.boardService.deleteTaskList(this.idListFrom)
-        .subscribe(MensagemErro =>
-          {
-            this.MensagemErro = MensagemErro;
-            //Após deletar a lista, atualizo todas as listas e limpo os campos de seleção
-            alert('Lista removida e tarefas deletadas com sucesso');
-            this.getTaskLists();
-            this.idListFrom=0;
-            this.idListTo=0;
-          });
-      }
-    }
+  openDialog() {
+    const dialogRef = this.dialog.open(RemoveListDialogComponent, { data: this.selectedBoard});
+    dialogRef.afterClosed().subscribe (result => {
+      this.selectedBoard = result[0];
+      this.getTaskLists();
+    });
   }
 }
 

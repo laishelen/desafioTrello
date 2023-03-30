@@ -1,67 +1,25 @@
 .grab {
-    cursor: -webkit-grab; cursor: grab;
-    width:150px;
-    height:30px;
+  cursor: move;
+  width:164px;
+  height: 40px;
+  padding: 5px 15px;
 }
 
-button[name="drop"]{    
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 15px;
-    color: white;
-}
-
-.menu-drop{
-    margin-left: 77px;    
-    width:1px;
-    display: inline-block;
-    position: relative;
-  }
-  
-  .drop-content{
-    display: none;
-    background-color: #4aa3b5;
-    position: absolute;
-    z-index: 1;
-  }
-
-  .drop-content a{
-    color: white;
-    padding: 8px 10px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .drop-content a:hover{
-    background-color: #000000;
-    cursor: pointer;
-  }
-
-  .menu-drop:hover .drop-content{
-    display: block;
-  }  
+.menu-drop{   
+  display: inline-block;
+  position: relative;
+  right: auto;
+}  
 
 .box {
-    border:1px solid #444;
-    width:230px;
+  margin-top: 3px;
+  border:1px solid #444;
+  width:230px;
 }
 
 .box input {
-    display:inline-block;
-    outline:0;
-    border:0;
-    background: #ffffff;
-    padding: 5px;
-}
-
-.box .button {
-    background: #ffffff;
-    color: #fff;
-    font-weight: bold;
-    border:none;
-    float:right;
-    padding: 4px 10px;
+  border:0;
+  background: #ffffff;
 }
 
 .modal-dialog {

@@ -3,7 +3,15 @@ import { Board } from 'src/app/models/board';
 import { BoardService } from 'src/app/services/board.service';
 import { MensagemErro } from 'src/app/models/mensagemerro';
 import { Router } from '@angular/router';
-import { TaskList } from 'src/app/models/taskList';
+import { MatDialog } from '@angular/material/dialog';
+import { NewBoardDialogComponent } from './new.board.dialog/new.board.dialog.component';
+import { ConfirmationDeleteDialogComponent } from './confirmation.delete.dialog/confirmation.delete.dialog.component';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material/icon';
+
+const logoURL = 
+"https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg";
 
 @Component({
   selector: 'app-inicio',
@@ -12,6 +20,23 @@ import { TaskList } from 'src/app/models/taskList';
 })
 
 export class InicioComponent {
+  constructor(
+    private boardService: BoardService, 
+    private router: Router, 
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private domSanitizer: DomSanitizer,
+    private matIconRegistry: MatIconRegistry,) {
+        this.matIconRegistry.addSvgIcon(
+          "logo",
+          this.
+          domSanitizer.
+          bypassSecurityTrustResourceUrl(logoURL));
+    }
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  
   listBoards:Board[] | undefined;
   displayBoard = false;
   selectedBoard:Board = {id: 0, titulo: '--'};
@@ -28,48 +53,35 @@ export class InicioComponent {
     ErrorMessage:''
   }
 
-  constructor(private boardService: BoardService, private router: Router) { }
-
   ngOnInit(): void {
     this.getBoards();
   }
 
-  saveBoard() {
-    this.boardService.saveBoard(this.board)
-    .subscribe(MensagemErro => {
+  deleteBoard(id:number) {    
+    const dialogRef = this.dialog.open(ConfirmationDeleteDialogComponent,{
+    data:{
+      message: 'Você tem certeza que deseja deletar?',
+      buttonText: {
+        ok: 'Sim',
+        cancel: 'Não'}
+    }});
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.boardService.deleteBoard(id)
+          .subscribe(MensagemErro => {
+            this.MensagemErro = MensagemErro;
+            this.getBoards()
 
-        var board:Board = Object.assign(MensagemErro);
-        var todo:TaskList = {id:0, titulo: "To Do", quadrosId: board.id};
-        this.boardService.saveTaskList(todo).subscribe(MensagemErro => {
-          this.MensagemErro = MensagemErro;
-        });
-
-        var doing:TaskList = {id:0, titulo: "Doing", quadrosId: board.id};
-        this.boardService.saveTaskList(doing).subscribe(MensagemErro => {
-          this.MensagemErro = MensagemErro;
-        });
-
-        var done:TaskList = {id:0, titulo: "Done", quadrosId: board.id};
-        this.boardService.saveTaskList(done).subscribe(MensagemErro => {
-          this.MensagemErro = MensagemErro;
-        });
-
-        this.getBoards();
-        alert('Quadro criado com sucesso.');
+            this._snackBar.open('Quadro deletado com sucesso.', 'OK', {
+              horizontalPosition: this.horizontalPosition,
+              verticalPosition: this.verticalPosition, 
+              duration: 2500,    
+              panelClass: ['custom-style']
+            });
+          });
+      }
     });
-  }
-
-  deleteBoard(id:number) {
-    let confirmation = confirm('Deletar este quadro irá remover todas as listas e tarefas existentes. Deseja prosseguir?');
-    if(confirmation) {
-      this.boardService.deleteBoard(id)
-      .subscribe(MensagemErro => {
-        this.MensagemErro = MensagemErro;
-        this.getBoards()
-        alert('Quadro removido com sucesso.');
-      });
-    }    
-  }
+  }  
 
   selectBoard(selectedBoard:Board) {
     if(selectedBoard.id>0) {
@@ -80,8 +92,15 @@ export class InicioComponent {
 
   getBoards() {
     this.boardService.getBoards()
-    .subscribe(data => {
-      this.listBoards = data;
+    .subscribe(data => { this.listBoards = data; });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(NewBoardDialogComponent, {data: {board: this.board}} );
+    dialogRef.afterClosed().subscribe(result => {
+      this.board = result;
+      this.getBoards();
     });
   }
 }
+
