@@ -1,4 +1,4 @@
-DesafioTrello
+# DesafioTrello
 
 O objetivo é o desenvolvimento de um frontend em Angular para um software de
 gestão de atividades da metodologia Kanban, como o Trello.
@@ -14,18 +14,18 @@ gestão de atividades da metodologia Kanban, como o Trello.
 
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-🔴 PASSO A PASSO DE COMO EXECUTAR A APLICAÇÃO <br>
+## <a id="instalacao"> 🔴 PASSO A PASSO DE COMO EXECUTAR A APLICAÇÃO </a>
 
-- Clone o repositório com o comando: <br>
-$ git clone https://github.com/laishelen/desafioTrello.git
 
-- Execute no terminal: <br>
-npm install
+<b>- Clone o repositório com o comando: </b> `$ git clone https://github.com/laishelen/desafioTrello.git` <br>
 
-- Execute no terminal: <br>
-ng serve - Navegue até http://localhost:4200/. 
 
-- Execute JSON Server: <br>
-npm run backend
+<b>- Execute no terminal: </b> `npm install` <br>
+
+
+<b>- Execute no terminal: </b> `ng serve` - Navegue até http://localhost:4200/. <br>
+
+
+<b>- Execute JSON Server: </b> `npm run backend` <br>
 
 
