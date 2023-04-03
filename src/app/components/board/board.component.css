@@ -7,6 +7,18 @@
     margin-left:-15px;
 }
 
+.mat-mdc-raised-button.buttonBack {
+    background-color: black;
+    color: white;
+}
+
+.mat-mdc-raised-button.backButton {
+    margin-top: -10px;
+    height:40px;
+    background-color: black;
+    color: white;
+}
+
 .addAnotherList {
     width:200px;
     height:40px;
@@ -27,25 +39,27 @@
 }
 
 .card {
-    width:17rem;
-    margin-left:-15px;
+    width: 267px;
+    margin-bottom:16px;
 }
 
-.backButton {
-    margin-bottom:10px;
-    height:40px;
+.align {
+    text-align: center;
 }
 
 .addButton {    
-    margin-bottom:10px;
+    margin-top: -10px;
     margin-left:5px;
-    width:130px;
+    width:120px;
     height:40px;
 }
 
 .example-full-width {
-    width: 100%;
+    margin-left:-15px;
+    margin-top:10px;
+    width: 255px;
 }
+
 
 
 

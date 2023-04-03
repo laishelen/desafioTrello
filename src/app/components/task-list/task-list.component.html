@@ -1,35 +1,42 @@
-<div class="card">
-    <div class="card-body">            
-        <h5 class="card-title">{{listDetails.titulo}}</h5>            
-        
-        <app-task   
-            cdkDrag 
-            class="example-box" 
-            *ngFor="let task of taskList"
-            [taskDetail]="task" id="{{task.id}}"
-            (updateParent)="getTasks()">
-        </app-task>        
+<div class="card">            
+    <mat-table mat-table [dataSource]="taskList" class="mat-elevation">
+        <ng-container matColumnDef="task">
+            <mat-header-cell *matHeaderCellDef>{{listDetails.titulo}}</mat-header-cell>
+            <mat-cell *matCellDef="let task"> 
+                <app-task 
+                    cdkDrag [cdkDragData]=task                                             
+                    class="example-box" 
+                    [taskDetail]="task" id="{{task.id}}"
+                    (updateParent)="getTasks()">
+                </app-task>
+            </mat-cell>
+        </ng-container>
 
-        <mat-form-field class="example-full-width" *ngIf="showAddTask">
-            <mat-label>Título</mat-label>
-            <input  matInput [(ngModel)]="newTask.titulo" dir="auto"
-                    placeholder="Insira um título para o cartão..." data-autosize="true"> 
-        </mat-form-field> 
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]=row></mat-row>
+    </mat-table>       
 
-        <button mat-raised-button class="backButton" color="basic" *ngIf="showAddTask" (click)="cancelTask()">
+    <mat-form-field class="example-full-width" *ngIf="showAddTask" appearance="outline">
+        <mat-label>Título</mat-label>
+        <input  matInput [(ngModel)]="newTask.titulo" dir="auto"
+                placeholder="Insira um título para o cartão..." data-autosize="true"> 
+    </mat-form-field> 
+
+    <div class="align">
+        <button mat-raised-button class="buttonBack" *ngIf="showAddTask" (click)="cancelTask()">
             <mat-icon>keyboard_return</mat-icon>   
             Voltar             
         </button>   
         <button mat-raised-button class="addTask" color="primary" *ngIf="showAddTask" (click)="saveTask()">
             <mat-icon>add</mat-icon>
             Tarefa
-        </button>  
-                    
-        <button mat-raised-button class="addTask2" color="primary" *ngIf="!showAddTask" (click)="showAddTask=!showAddTask">
-            <mat-icon>add</mat-icon>
-            Adicionar tarefa
-        </button>              
+        </button>
     </div>
+                
+    <button mat-raised-button class="addTask2" color="primary" *ngIf="!showAddTask" (click)="showAddTask=!showAddTask">
+        <mat-icon>add</mat-icon>
+        Adicionar tarefa
+    </button>  
 </div>
 
 

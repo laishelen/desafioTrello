@@ -38,3 +38,8 @@
     width: 100%;
 }
 
+.mat-mdc-raised-button.buttonBack {
+    background-color: black;
+    color: white;
+}
+

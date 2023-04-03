@@ -7,7 +7,7 @@ import { MensagemErro } from 'src/app/models/mensagemerro';
 import { TaskList } from 'src/app/models/taskList';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Task } from 'src/app/models/task';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveListDialogComponent } from './remove-list.dialog/remove-list.dialog.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -30,6 +30,8 @@ export class BoardComponent {
   taskList:Task[] =[];
   listAllTaskList:TaskList[] | undefined;
   arrayTaskListId:string[] = [];
+
+  displayedColumns: string[] = ['task'];
 
   noList:number = 0;
   updateCounter:number = 0;
@@ -67,26 +69,16 @@ export class BoardComponent {
   drop(event: CdkDragDrop<Task[]>) {
     var taskId = event.item.element.nativeElement.id;
     var newColumnId = event.container.id;
-    var oldColumnId = event.previousContainer.id;
+    var oldColumnId = event.previousContainer.id;    
     
-    console.log('tarefa: '+taskId+' da lista: ' + oldColumnId + ' pra lista: ' + newColumnId);
-
+    console.log('tarefa: '+taskId+' da lista: ' + oldColumnId + ' pra lista: ' + newColumnId); 
+    
     this.taskService.moveTask(taskId,newColumnId)
     .subscribe(MensagemErro => {
       this.MensagemErro = MensagemErro;
       this.getTaskLists();
     });
-    // if (event.previousContainer === event.container) {
-    //   moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    // } else {
-    //   transferArrayItem(
-    //     event.previousContainer.data,
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex,
-    //   );
-    // }
-  }  
+  }    
 
   getBoard(id:number) {
     this.boardService.getBoard(id)

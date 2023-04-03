@@ -23,6 +23,10 @@ export class ConfirmationDeleteTaskDialogComponent {
       }
   }
 
+  close(): void {
+    this.dialogRef.close();
+  }
+
   onConfirmClick(): void {
     this.dialogRef.close(true);
   }

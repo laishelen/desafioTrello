@@ -5,16 +5,19 @@
   padding: 5px 15px;
 }
 
-.menu-drop{   
+.menu-drop{      
+  margin-top:3px;
+  background-color: white; 
   display: inline-block;
-  position: relative;
-  right: auto;
+  position: absolute;
+  right:3px;
 }  
 
 .box {
-  margin-top: 3px;
-  border:1px solid #444;
-  width:230px;
+  margin-left: -23px;
+  border:1px solid #000000;
+  width:261px;
+  background-color: white;
 }
 
 .box input {
@@ -41,4 +44,12 @@
 
 .title {
   width:240px;
+}
+
+.buttonEdit:hover {
+  background-color: rgba(0, 0, 0, 0.099);
+}
+
+.buttonDelete:hover {
+  background-color: rgba(0, 0, 0, 0.099);
 }

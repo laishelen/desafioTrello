@@ -28,6 +28,9 @@ import { RemoveListDialogComponent } from './components/board/remove-list.dialog
 import { EditTaskDialogComponent } from './components/task/edit.task.dialog/edit.task.dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTableModule} from '@angular/material/table';
+import { MatCardModule} from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatGridListModule,
     MatDialogModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule,
+    MatCardModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

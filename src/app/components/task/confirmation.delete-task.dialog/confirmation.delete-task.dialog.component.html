@@ -1,9 +1,12 @@
-<mat-dialog-content>
-	<p>
-		{{message}}
-	</p>
-</mat-dialog-content>
-<mat-dialog-actions align="center">
-	<button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
-	<button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
-</mat-dialog-actions>
+<div class="card">
+	<mat-dialog-content>
+		<button type="button" class="close" (click)="close()">&times;</button>
+		<p>
+			{{message}}
+		</p>
+	</mat-dialog-content>
+	<mat-dialog-actions align="center">
+		<button mat-raised-button class="buttonDelete" (click)="onConfirmClick()" tabindex="1" color="primary">{{confirmButtonText}}</button>
+		<button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+	</mat-dialog-actions>
+</div>

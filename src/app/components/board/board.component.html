@@ -12,35 +12,38 @@
     <button mat-raised-button class="removeList" (click)="openDialog()" role="button" aria-expanded="false" aria-controls="collapseExample" color="warn">
         <mat-icon>delete</mat-icon>
         Remover lista
-    </button>    
-    
+    </button>  
+
     <div class="title">{{selectedBoard.titulo}}</div>
     <div *ngIf="showAddTaskList" class="card">
         <div class="card-body">            
-            <mat-form-field class="example-full-width">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Título</mat-label>
                 <input matInput [(ngModel)]="newList.titulo" placeholder="Insira o título da lista..."> 
             </mat-form-field>            
-   
-            <button mat-raised-button class="backButton" color="basic" (click)="showAddTaskList =!showAddTaskList">
-                <mat-icon>keyboard_return</mat-icon>
-                Voltar                
-            </button>              
-            <button mat-raised-button class="addButton" color="primary" *ngIf="showAddTaskList" (click)="addList()">
-                <mat-icon>add</mat-icon>
-                Lista
-            </button>   
+            <div class="align">
+                <button mat-raised-button class="backButton" color="basic" (click)="showAddTaskList =!showAddTaskList">
+                    <mat-icon>keyboard_return</mat-icon>
+                    Voltar                
+                </button>              
+                <button mat-raised-button class="addButton" color="primary" *ngIf="showAddTaskList" (click)="addList()">
+                    <mat-icon>add</mat-icon>
+                    Lista
+                </button>  
+            </div> 
         </div>
-    </div>   
-    <div class="row row-cols-1 row-cols-md-4 g-4 mt-4" *ngIf="displayBoard">
-        <app-task-list  
-            cdkDropList
-            [cdkDropListConnectedTo]="arrayTaskListId"
-            class="example-list"   
-            *ngFor="let taskList of listAllTaskList" 
-            (cdkDropListDropped)="drop($event)"            
-            [listDetails]="taskList" 
-            id="{{taskList.id}}">
-        </app-task-list>
+    </div>      
+    
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25%" *ngFor="let taskList of listAllTaskList">
+            <app-task-list  
+                cdkDropList
+                [cdkDropListConnectedTo]="arrayTaskListId"                        
+                (cdkDropListDropped)="drop($event)"   
+                cdkDropListOrientation="horizontal"   
+                [listDetails]="taskList" 
+                id="{{taskList.id}}"> 
+            </app-task-list> 
+        </div>
     </div>
 </div>

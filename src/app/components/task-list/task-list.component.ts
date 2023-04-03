@@ -22,6 +22,8 @@ export class TaskListComponent {
   newTask:Task = {id: 0, titulo: '', descricao:'', listastarefasId: 0};
   list:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
   @Input() listDetails:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
+
+  displayedColumns: string[] = ['task'];
  
   MensagemErro: MensagemErro={
     ErrorCode:0,
@@ -32,7 +34,7 @@ export class TaskListComponent {
 
   ngOnInit(): void { 
     this.getTasks();
-  }   
+  }     
 
   getTasks() {
     this.taskService.getTasks(this.listDetails.id)
