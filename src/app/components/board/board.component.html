@@ -1,49 +1,44 @@
 <app-menu></app-menu>
 
-<div class="container">     
-    <button mat-raised-button class="buttonBack" color="basic" routerLink="/inicio">
-        <mat-icon>keyboard_return</mat-icon>
-        Voltar
-    </button>     
-    <button mat-raised-button class="addAnotherList" color="primary" (click)="showAddTaskList =!showAddTaskList">
-        <mat-icon>add</mat-icon>
-        Adicionar outra lista
-    </button>  
-    <button mat-raised-button class="removeList" (click)="openDialog()" role="button" aria-expanded="false" aria-controls="collapseExample" color="warn">
-        <mat-icon>delete</mat-icon>
-        Remover lista
-    </button>  
+<button mat-raised-button class="buttonBack" color="basic" routerLink="/inicio">
+    <mat-icon>keyboard_return</mat-icon>
+    Voltar
+</button>     
+<button mat-raised-button class="addAnotherList" color="primary" (click)="showAddTaskList =!showAddTaskList">
+    <mat-icon>add</mat-icon>
+    Adicionar outra lista
+</button>  
+<button mat-raised-button class="removeList" (click)="openDialog()" role="button" aria-expanded="false" aria-controls="collapseExample" color="warn">
+    <mat-icon>delete</mat-icon>
+    Remover lista
+</button>  
 
-    <div class="title">{{selectedBoard.titulo}}</div>
-    <div *ngIf="showAddTaskList" class="card">
-        <div class="card-body">            
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Título</mat-label>
-                <input matInput [(ngModel)]="newList.titulo" placeholder="Insira o título da lista..."> 
-            </mat-form-field>            
-            <div class="align">
-                <button mat-raised-button class="backButton" color="basic" (click)="showAddTaskList =!showAddTaskList">
-                    <mat-icon>keyboard_return</mat-icon>
-                    Voltar                
-                </button>              
-                <button mat-raised-button class="addButton" color="primary" *ngIf="showAddTaskList" (click)="addList()">
-                    <mat-icon>add</mat-icon>
-                    Lista
-                </button>  
-            </div> 
-        </div>
-    </div>      
-    
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="25%" *ngFor="let taskList of listAllTaskList">
-            <app-task-list  
-                cdkDropList
-                [cdkDropListConnectedTo]="arrayTaskListId"                        
-                (cdkDropListDropped)="drop($event)"   
-                cdkDropListOrientation="horizontal"   
-                [listDetails]="taskList" 
-                id="{{taskList.id}}"> 
-            </app-task-list> 
-        </div>
+<div class="title">{{selectedBoard.titulo}}</div>
+<div *ngIf="showAddTaskList" class="card" flex="20%">
+    <span>        
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Título</mat-label>
+            <input matInput [(ngModel)]="newList.titulo" placeholder="Insira o título da lista..."> 
+        </mat-form-field>   
+        <button mat-raised-button class="backButton" color="basic" (click)="showAddTaskList =!showAddTaskList">
+            <mat-icon>keyboard_return</mat-icon>
+            Voltar                
+        </button>              
+        <button mat-raised-button class="addButton" color="primary" *ngIf="showAddTaskList" (click)="addList()">
+            <mat-icon>add</mat-icon>
+            Lista
+        </button> 
+    </span>
+</div>    
+
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="20%" class="taskList" *ngFor="let taskList of listAllTaskList">
+        <app-task-list  
+            cdkDropList
+            [cdkDropListConnectedTo]="arrayTaskListId"                        
+            (cdkDropListDropped)="drop($event)"  
+            [listDetails]="taskList" 
+            id="{{taskList.id}}"> 
+        </app-task-list> 
     </div>
 </div>

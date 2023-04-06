@@ -1,10 +1,14 @@
 .buttonBack {
-    width:100px;
+    width:130px;
     height:40px;
     margin-right:20px;
     margin-top:30px;
     margin-bottom:30px;
-    margin-left:-15px;
+    margin-left:50px;
+}
+
+.taskList {
+    margin-left: 50px;
 }
 
 .mat-mdc-raised-button.buttonBack {
@@ -13,7 +17,8 @@
 }
 
 .mat-mdc-raised-button.backButton {
-    margin-top: -10px;
+    margin-top:-10px;
+    width:130px;
     height:40px;
     background-color: black;
     color: white;
@@ -31,7 +36,7 @@
 }
 
 .title {
-    margin-left:-15px;
+    margin-left:50px;
     margin-top:10px;
     margin-bottom:30px;
     font-size:16pt;
@@ -39,25 +44,30 @@
 }
 
 .card {
-    width: 267px;
+    width: 19.4%;
+    margin-left:50px;
     margin-bottom:16px;
+    align-items: center;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-.align {
+span {
+    margin-bottom:15px;
     text-align: center;
 }
 
-.addButton {    
-    margin-top: -10px;
+.addButton {  
+    margin-top:-10px; 
     margin-left:5px;
-    width:120px;
+    width:130px;
     height:40px;
 }
 
 .example-full-width {
-    margin-left:-15px;
-    margin-top:10px;
-    width: 255px;
+    margin-top:15px;
+    width:90%;
 }
 
 

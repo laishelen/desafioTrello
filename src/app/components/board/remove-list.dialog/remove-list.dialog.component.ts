@@ -41,9 +41,9 @@ export class RemoveListDialogComponent {
     private taskListService: TaskListService,
     private _snackBar: MatSnackBar) { }
 
-    ngOnInit() {
-      this.getTaskLists();
-    }
+  ngOnInit() {
+    this.getTaskLists();
+  }
 
   getTaskLists() {
     this.taskListService.getTaskLists(this.board.id) 
@@ -132,9 +132,12 @@ export class RemoveListDialogComponent {
             this.getTaskLists();
             this.idListFrom=0;
             this.idListTo=0;
-          });
-      }
-    }
+          }
+        );
+        this.cleanLists;
+        this.close();
+      }        
+    }    
   }
 
   cleanLists() {
