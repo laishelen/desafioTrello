@@ -87,6 +87,11 @@ mat-form-field {
 
 .example-accordion:hover {
     background-color: rgba(0, 0, 0, 0.099);
-  }
+}
+
+::ng-deep .mat-mdc-form-field-flex {
+    margin-top: -10px !important;
+    margin-bottom: -10px !important;
+}
 
   

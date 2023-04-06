@@ -7,7 +7,7 @@ import { MensagemErro } from 'src/app/models/mensagemerro';
 import { TaskList } from 'src/app/models/taskList';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Task } from 'src/app/models/task';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveListDialogComponent } from './remove-list.dialog/remove-list.dialog.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -30,14 +30,6 @@ export class BoardComponent {
   taskList:Task[] =[];
   listAllTaskList:TaskList[] | undefined;
   arrayTaskListId:string[] = [];
-
-  displayedColumns: string[] = ['task'];
-
-  noList:number = 0;
-  updateCounter:number = 0;
-  idListFrom:number=0;
-  idListTo:number=0;
-  confirmationForRemoval:boolean = false;
   
   MensagemErro: MensagemErro={
     ErrorCode:0,

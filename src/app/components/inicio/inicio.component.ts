@@ -7,8 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewBoardDialogComponent } from './new.board.dialog/new.board.dialog.component';
 import { ConfirmationDeleteDialogComponent } from './confirmation.delete.dialog/confirmation.delete.dialog.component';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 const logoURL = 
 "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg";
@@ -38,7 +38,6 @@ export class InicioComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   
   listBoards:Board[] | undefined;
-  displayBoard = false;
   selectedBoard:Board = {id: 0, titulo: '--'};
   board:Board = {id: 0, titulo: ''};
 

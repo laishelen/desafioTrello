@@ -18,7 +18,6 @@ export class RemoveListDialogComponent {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  selectedBoard:Board = {id: 0, titulo: '--'};
   displayBoard:boolean = false;
   listAllTaskList:TaskList[] | undefined;
   arrayTaskListId:string[] = [];

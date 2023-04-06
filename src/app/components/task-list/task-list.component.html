@@ -1,6 +1,6 @@
 <mat-card class="example-card">
     <mat-card-header class="header">
-        <mat-card-title>{{listDetails.titulo}}</mat-card-title>
+        <mat-card-title> {{listDetails.titulo}} </mat-card-title>
     </mat-card-header>
     
     <cdk-virtual-scroll-viewport class="example-viewport" #viewPort itemSize="48" matSort>     
@@ -17,7 +17,6 @@
     </cdk-virtual-scroll-viewport>   
 
     <mat-form-field class="example-full-width" *ngIf="showAddTask" appearance="outline">
-        <mat-label>Título</mat-label>
         <input  matInput [(ngModel)]="newTask.titulo" dir="auto"
                 placeholder="Insira um título para o cartão..." data-autosize="true"> 
     </mat-form-field> 

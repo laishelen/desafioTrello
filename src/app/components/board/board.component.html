@@ -17,8 +17,7 @@
 <div *ngIf="showAddTaskList" class="card" flex="20%">
     <span>        
         <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Título</mat-label>
-            <input matInput [(ngModel)]="newList.titulo" placeholder="Insira o título da lista..."> 
+            <input matInput [(ngModel)]="newList.titulo" placeholder="Insira o título para a lista..."> 
         </mat-form-field>   
         <button mat-raised-button class="backButton" color="basic" (click)="showAddTaskList =!showAddTaskList">
             <mat-icon>keyboard_return</mat-icon>

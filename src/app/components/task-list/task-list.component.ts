@@ -14,23 +14,21 @@ export class TaskListComponent {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  
-  successfulDrop = new Event('successfulDrop');
 
   showAddTask:boolean = false;
   taskList:Task[] =[];
   newTask:Task = {id: 0, titulo: '', descricao:'', listastarefasId: 0};
   list:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
   @Input() listDetails:TaskList = {id: 0, titulo: '', quadrosId: 0, tasks: []};
-
-  displayedColumns: string[] = ['task'];
  
   MensagemErro: MensagemErro={
     ErrorCode:0,
     ErrorMessage:''
   }  
 
-  constructor(private taskService: TaskService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private taskService: TaskService, 
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void { 
     this.getTasks();
@@ -54,7 +52,7 @@ export class TaskListComponent {
       .subscribe(MensagemErro => {
         this.MensagemErro = MensagemErro;
         this.taskService.getTasks(this.listDetails.id)
-            .subscribe(data => this.taskList = data);
+          .subscribe(data => this.taskList = data);
       });
       this.newTask.titulo = '';
       this.showAddTask = false;
@@ -64,7 +62,7 @@ export class TaskListComponent {
           verticalPosition: this.verticalPosition,
           duration: 2500,    
           panelClass: ['custom-style']})
-    }
+    }    
   }
 }
 
